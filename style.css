@@ -11,6 +11,16 @@
   --text-light: #e5e5e5;
   --text-muted: #b9b9b9;
   --line: rgba(255, 255, 255, 0.28);
+  --font-body: 14px;
+  --font-small: 11px;
+  --font-nav: 15px;
+  --icon-nav: 24px;
+  --font-logo: 17px;
+  --font-logo-small: 9px;
+  --font-hero: 34px;
+  --font-title: 27px;
+  --font-review: 21px;
+  --font-footer: 11px;
 }
 
 html {
@@ -25,17 +35,25 @@ body {
   color: var(--text-white);
 }
 
+body.menu-open {
+  overflow: hidden;
+}
+
 a {
   color: inherit;
 }
 
 .hero {
   position: relative;
-  min-height: 280px;
+  min-height: 360px;
   background-image: url("assets/x1/bg_header_x1.jpg");
   background-size: cover;
   background-position: center;
   overflow: hidden;
+}
+
+body.menu-open .hero {
+  overflow: visible;
 }
 
 .hero-overlay {
@@ -61,13 +79,13 @@ a {
   line-height: 1;
   letter-spacing: 3px;
   font-weight: 700;
-  font-size: 16px;
+  font-size: var(--font-logo);
 }
 
 .logo small {
   display: block;
   margin-top: 3px;
-  font-size: 8px;
+  font-size: var(--font-logo-small);
   letter-spacing: 4px;
   font-weight: 400;
 }
@@ -75,6 +93,135 @@ a {
 .nav-links,
 .nav-icons {
   display: none;
+}
+
+.nav-icon-button {
+  width: calc(var(--icon-nav) + 16px);
+  height: calc(var(--icon-nav) + 16px);
+  border: 0;
+  background: transparent;
+  color: #fff;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  padding: 0;
+}
+
+.nav-icon-button svg {
+  width: var(--icon-nav);
+  height: var(--icon-nav);
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.burger-button {
+  position: relative;
+  z-index: 4;
+  width: 42px;
+  height: 42px;
+  border: 1px solid rgba(255, 255, 255, 0.55);
+  border-radius: 0;
+  background: rgba(0, 0, 0, 0.18);
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  cursor: pointer;
+}
+
+.burger-button span {
+  width: 20px;
+  height: 2px;
+  background: #fff;
+  transition:
+    transform 0.25s ease,
+    opacity 0.25s ease;
+}
+
+.burger-button.is-open span:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
+}
+
+.burger-button.is-open span:nth-child(2) {
+  opacity: 0;
+}
+
+.burger-button.is-open span:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg);
+}
+
+.navbar.is-open {
+  position: fixed;
+  inset: 0;
+  z-index: 10;
+  width: 100%;
+  height: 100vh;
+  height: 100dvh;
+  margin: 0;
+  padding: 18px 16px;
+  align-items: flex-start;
+  background: rgba(32, 33, 34, 0.98);
+  animation: menu-slide-in 0.25s ease;
+}
+
+.navbar.is-open .nav-links {
+  position: absolute;
+  inset: 96px 0 auto;
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  list-style: none;
+  padding: 0 16px;
+  background: transparent;
+  border: 0;
+}
+
+.navbar.is-open .nav-links a {
+  display: block;
+  padding: 17px 0;
+  color: #fff;
+  text-decoration: none;
+  font-size: 24px;
+  line-height: 1.25;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.navbar.is-open .nav-links li:last-child a {
+  border-bottom: 0;
+}
+
+.navbar.is-open .nav-icons {
+  position: absolute;
+  left: 16px;
+  right: 16px;
+  bottom: 28px;
+  z-index: 3;
+  min-height: 48px;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  background: transparent;
+  border: 0;
+}
+
+.navbar.is-open .nav-icon-button {
+  color: #fff;
+}
+
+@keyframes menu-slide-in {
+  from {
+    transform: translateX(100%);
+  }
+
+  to {
+    transform: translateX(0);
+  }
 }
 
 .hero-content {
@@ -85,16 +232,16 @@ a {
 }
 
 .hero-content h1 {
-  font-size: 32px;
-  line-height: 1;
+  font-size: var(--font-hero);
+  line-height: 1.08;
   margin-bottom: 15px;
   font-weight: 700;
 }
 
 .hero-content p {
-  max-width: 430px;
-  font-size: 12px;
-  line-height: 1.45;
+  max-width: 500px;
+  font-size: var(--font-body);
+  line-height: 1.55;
   color: var(--text-light);
 }
 
@@ -130,15 +277,15 @@ a {
 }
 
 .text-box h2 {
-  font-size: 26px;
-  line-height: 1.2;
+  font-size: var(--font-title);
+  line-height: 1.25;
   margin-bottom: 20px;
   font-weight: 400;
 }
 
 .text-box p {
-  font-size: 13px;
-  line-height: 1.45;
+  font-size: var(--font-body);
+  line-height: 1.6;
   color: var(--text-light);
   letter-spacing: 0.2px;
 }
@@ -194,7 +341,7 @@ a {
 }
 
 .review-content h2 {
-  font-size: 19px;
+  font-size: var(--font-review);
   line-height: 1.45;
   font-weight: 700;
   margin-bottom: 16px;
@@ -209,7 +356,7 @@ a {
   background: #fff;
   color: #222;
   text-decoration: none;
-  font-size: 10px;
+  font-size: var(--font-small);
 }
 
 .footer {
@@ -227,7 +374,7 @@ a {
 
 .footer-col h3 {
   text-transform: uppercase;
-  font-size: 9px;
+  font-size: var(--font-small);
   line-height: 1;
   letter-spacing: 1.4px;
   margin-bottom: 17px;
@@ -238,8 +385,8 @@ a {
   display: block;
   color: var(--text-muted);
   text-decoration: none;
-  font-size: 9px;
-  line-height: 1.9;
+  font-size: var(--font-footer);
+  line-height: 2;
 }
 
 .footer-col a:hover {
@@ -259,7 +406,7 @@ a {
   display: grid;
   place-items: center;
   color: #fff;
-  font-size: 10px;
+  font-size: var(--font-small);
   line-height: 1;
   text-decoration: none;
 }
@@ -275,7 +422,7 @@ a {
   justify-content: center;
   gap: 14px;
   color: var(--text-muted);
-  font-size: 8px;
+  font-size: var(--font-small);
   text-align: center;
   text-transform: uppercase;
 }
@@ -304,6 +451,14 @@ a {
 }
 
 @media (min-width: 480px) {
+  :root {
+    --font-logo: 18px;
+    --font-nav: 16px;
+    --icon-nav: 25px;
+    --font-hero: 36px;
+    --font-review: 22px;
+  }
+
   .navbar,
   .hero-content,
   .main,
@@ -313,29 +468,41 @@ a {
   }
 
   .hero {
-    min-height: 300px;
+    min-height: 390px;
   }
 
   .image-box img {
     height: 260px;
   }
 
-  .review-content h2 {
-    font-size: 20px;
+  .navbar.is-open .nav-links a {
+    font-size: 26px;
   }
 }
 
 @media (min-width: 640px) {
+  :root {
+    --font-body: 15px;
+    --font-nav: 17px;
+    --icon-nav: 26px;
+    --font-logo: 19px;
+    --font-logo-small: 10px;
+    --font-hero: 40px;
+    --font-title: 30px;
+    --font-review: 24px;
+    --font-footer: 12px;
+  }
+
   .hero {
-    min-height: 320px;
+    min-height: 430px;
   }
 
   .hero-content {
     margin-top: 70px;
   }
 
-  .hero-content h1 {
-    font-size: 34px;
+  .navbar.is-open .nav-links a {
+    font-size: 28px;
   }
 
   .main {
@@ -357,8 +524,20 @@ a {
 }
 
 @media (min-width: 768px) {
+  :root {
+    --font-body: 14px;
+    --font-nav: 16px;
+    --icon-nav: 26px;
+    --font-logo: 17px;
+    --font-logo-small: 9px;
+    --font-hero: 36px;
+    --font-title: 28px;
+    --font-review: 22px;
+    --font-footer: 11px;
+  }
+
   .hero {
-    min-height: 240px;
+    min-height: 460px;
   }
 
   .navbar {
@@ -366,24 +545,27 @@ a {
     padding-top: 14px;
   }
 
-  .nav-links {
-    display: flex;
-    align-items: center;
-    gap: 16px;
-    list-style: none;
+  .navbar.is-open {
+    left: auto;
+    right: 0;
+    width: 50%;
+    min-width: 384px;
+    padding: 18px 24px;
   }
 
-  .nav-links a,
-  .nav-icons span {
+  body.menu-open::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: 9;
+    background: rgba(0, 0, 0, 0.5);
+  }
+
+  .nav-links a {
     color: #fff;
     text-decoration: none;
-    font-size: 10px;
+    font-size: var(--font-nav);
     font-weight: 400;
-  }
-
-  .nav-icons {
-    display: flex;
-    gap: 13px;
   }
 
   .hero-content {
@@ -425,13 +607,30 @@ a {
 }
 
 @media (min-width: 1024px) {
+  :root {
+    --font-body: 14px;
+    --font-small: 11px;
+    --font-nav: 13px;
+    --icon-nav: 24px;
+    --font-logo: 17px;
+    --font-logo-small: 9px;
+    --font-hero: 36px;
+    --font-title: 29px;
+    --font-review: 23px;
+    --font-footer: 11px;
+  }
+
   .navbar,
   .hero-content {
     width: min(82%, 1120px);
   }
 
+  .burger-button {
+    display: none;
+  }
+
   .hero {
-    min-height: 190px;
+    min-height: 500px;
   }
 
   .hero-content {
@@ -439,7 +638,22 @@ a {
   }
 
   .nav-links {
+    display: flex;
+    align-items: center;
     gap: 22px;
+    list-style: none;
+  }
+
+  .nav-icons {
+    display: flex;
+    gap: 13px;
+  }
+
+  .nav-links a {
+    color: #fff;
+    text-decoration: none;
+    font-size: var(--font-nav);
+    font-weight: 400;
   }
 
   .main {
@@ -462,10 +676,6 @@ a {
     padding: 32px 24px;
   }
 
-  .review-content h2 {
-    font-size: 22px;
-  }
-
   .footer {
     padding: 42px 0 22px;
   }
@@ -484,12 +694,24 @@ a {
 }
 
 @media (min-width: 1280px) {
-  .hero-content h1 {
-    font-size: 36px;
+  :root {
+    --font-body: 15px;
+    --font-nav: 14px;
+    --icon-nav: 25px;
+    --font-logo: 18px;
+    --font-logo-small: 9px;
+    --font-hero: 40px;
+    --font-title: 31px;
+    --font-review: 25px;
+    --font-footer: 12px;
   }
 
   .main {
     width: min(74%, 1040px);
+  }
+
+  .hero {
+    min-height: 540px;
   }
 
   .image-box img {
@@ -503,7 +725,7 @@ a {
 
 @media (min-width: 1440px) and (min-height: 1080px) {
   .hero {
-    min-height: 220px;
+    min-height: 417px;
     background-image: image-set(
       url("assets/x1/bg_header_x1.jpg") 1x,
       url("assets/x2/bg_header_x2.jpg") 2x
@@ -519,10 +741,46 @@ a {
   }
 }
 
+@media (min-width: 1440px) {
+  :root {
+    --font-body: 16px;
+    --font-small: 12px;
+    --font-nav: 16px;
+    --icon-nav: 28px;
+    --font-logo: 20px;
+    --font-logo-small: 10px;
+    --font-hero: 46px;
+    --font-title: 35px;
+    --font-review: 30px;
+    --font-footer: 13px;
+  }
+
+  .hero {
+    min-height: 417px;
+  }
+}
+
 @media (min-width: 1600px) {
+  :root {
+    --font-body: 17px;
+    --font-small: 13px;
+    --font-nav: 17px;
+    --icon-nav: 30px;
+    --font-logo: 22px;
+    --font-logo-small: 11px;
+    --font-hero: 50px;
+    --font-title: 38px;
+    --font-review: 33px;
+    --font-footer: 14px;
+  }
+
   .navbar,
   .hero-content {
     width: min(78%, 1280px);
+  }
+
+  .hero {
+    min-height: 500px;
   }
 
   .main {
@@ -539,21 +797,21 @@ a {
 }
 
 @media (min-width: 1920px) {
+  :root {
+    --font-body: 18px;
+    --font-small: 14px;
+    --font-nav: 18px;
+    --icon-nav: 32px;
+    --font-logo: 24px;
+    --font-logo-small: 12px;
+    --font-hero: 58px;
+    --font-title: 42px;
+    --font-review: 38px;
+    --font-footer: 15px;
+  }
+
   .hero {
-    min-height: 260px;
-  }
-
-  .hero-content h1 {
-    font-size: 40px;
-  }
-
-  .hero-content p,
-  .text-box p {
-    font-size: 14px;
-  }
-
-  .text-box h2 {
-    font-size: 30px;
+    min-height: 560px;
   }
 
   .content-row,
@@ -572,9 +830,26 @@ a {
 }
 
 @media (min-width: 2560px) {
+  :root {
+    --font-body: 20px;
+    --font-small: 15px;
+    --font-nav: 20px;
+    --icon-nav: 34px;
+    --font-logo: 27px;
+    --font-logo-small: 13px;
+    --font-hero: 68px;
+    --font-title: 48px;
+    --font-review: 44px;
+    --font-footer: 17px;
+  }
+
   .navbar,
   .hero-content {
     width: min(68%, 1480px);
+  }
+
+  .hero {
+    min-height: 660px;
   }
 
   .main {
@@ -610,6 +885,19 @@ a {
 }
 
 @media (min-width: 3200px) {
+  :root {
+    --font-body: 22px;
+    --font-small: 16px;
+    --font-nav: 22px;
+    --icon-nav: 38px;
+    --font-logo: 30px;
+    --font-logo-small: 15px;
+    --font-hero: 78px;
+    --font-title: 56px;
+    --font-review: 50px;
+    --font-footer: 18px;
+  }
+
   .navbar,
   .hero-content {
     width: 1600px;
@@ -620,7 +908,7 @@ a {
   }
 
   .hero {
-    min-height: 300px;
+    min-height: 760px;
   }
 
   .content-row,
@@ -647,7 +935,7 @@ a {
 
 @media (min-width: 3200px) and (min-height: 2000px) {
   .hero {
-    min-height: 340px;
+    min-height: 840px;
   }
 
   .review-section {
